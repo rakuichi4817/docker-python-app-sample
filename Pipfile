@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+streamlit = "*"
+
+[dev-packages]
+black = "*"
+flake8 = "*"
+isort = "*"
+ipykernel = "*"
+
+[requires]
+python_version = "3.10"
+
+[scripts]
+dev-start = "streamlit run app/main.py"
