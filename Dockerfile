@@ -3,12 +3,12 @@ FROM python:3.10-slim AS base
 
 ARG workdir="/workspace"
 WORKDIR $workdir
+RUN apt-get update
 
 # -----本番環境用ビルダー-----
 FROM base as builder
 
-RUN apt-get update && apt-get install -y git \
-    && pip install --upgrade pip \
+RUN pip install --upgrade pip \
     && pip install pipenv 
 
 # ライブラリをシステムへ直接書き込む
@@ -32,6 +32,6 @@ ENTRYPOINT streamlit run app/main.py --server.port=8501 --server.address=0.0.0.0
 FROM base AS development
 
 # devcontainer上では仮想環境を作って開発する
-RUN apt-get update && apt-get install -y git \
+RUN apt-get install -y git \
     && pip install --upgrade pip \
     && pip install pipenv
